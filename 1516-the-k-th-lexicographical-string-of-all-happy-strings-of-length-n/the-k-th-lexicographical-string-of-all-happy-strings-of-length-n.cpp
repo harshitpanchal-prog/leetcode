@@ -1,26 +1,30 @@
 class Solution {
 public:
-    void solve(int n, string &curr, vector<string>& result){
+    void solve(int n,int &count, string &curr,int k, string& result){
         if(curr.size()==n){
-            result.push_back(curr);
+            count++;
+            if(count==k){
+                result=curr;
+                return;
+            }
             return;
-        }
-        for(char ch= 'a'; ch <= 'c'; ch++){
+        }    
+        for(char ch='a'; ch<='c'; ch++){
             if(!curr.empty() && curr.back()==ch){
                 continue;
             }
             curr.push_back(ch);
-            solve(n,curr,result);
+            solve(n,count,curr,k,result);
             curr.pop_back();
+            
         }
     }
     string getHappyString(int n, int k) {
-        vector<string> result;
+        string result="";
         string curr="";
-        solve(n,curr,result);
-        if(result.size()<k){
-            return "";
-        }
-        return result[k-1];
+        int count=0;
+        solve(n,count,curr,k,result);
+        
+        return result;
     }
 };
