@@ -1,15 +1,15 @@
 class Solution {
 public:
     bool divideArray(vector<int>& nums) {
-        unordered_map<int ,int>mp;
+        unordered_set<int >st;
         for(int& num:nums){
-            mp[num]++;
-        }
-        for(auto& it:mp){
-            if(it.second % 2 !=0){
-                return false;
+            if(st.count(num)){
+                st.erase(num);
+            }else{
+                st.insert(num);
             }
         }
-        return true;
+        
+        return st.empty();
     }
 };
