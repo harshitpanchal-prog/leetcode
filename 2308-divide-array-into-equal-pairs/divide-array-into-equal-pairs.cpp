@@ -1,15 +1,16 @@
 class Solution {
 public:
     bool divideArray(vector<int>& nums) {
-        unordered_set<int >st;
+        vector<bool>paired(501,true);
         for(int& num:nums){
-            if(st.count(num)){
-                st.erase(num);
-            }else{
-                st.insert(num);
+            paired[num] = !paired[num];
+        }
+        for(int i=0 ; i<501 ; i++){
+            if(paired[i] == false){
+                return false;
             }
         }
         
-        return st.empty();
+        return true;;
     }
 };
