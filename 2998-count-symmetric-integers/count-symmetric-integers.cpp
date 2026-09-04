@@ -3,22 +3,18 @@ public:
     int countSymmetricIntegers(int low, int high) {
         int count = 0;
         for(int num = low ; num<=high ; num++){
-            string s = to_string(num);
-            int len=s.length();
-            if(len%2 !=0){
-                continue;
-            }
-            int leftsum=0;
-            int rightsum=0;
-             
-            for(int i=0 ; i<len/2 ; i++){
-                leftsum+=s[i]-'0';
-            } 
-            for(int i=len/2 ; i<len ;i++){
-                rightsum+=s[i]-'0';
-            }
-            if(leftsum == rightsum){
+            if(num>=10 && num<=99 && num%11 == 0){
                 count++;
+            }else if(num>=1000 && num<=9999){
+                int first = (num/1000);
+                int second = (num/100)%10;
+
+                int third = (num/10)%10;
+                int fourth = (num/1)%10;
+
+                if(first+second == third+fourth){
+                    count++;
+                }
             }
             
         }
