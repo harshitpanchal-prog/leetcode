@@ -3,10 +3,14 @@ public:
     int countSubarrays(vector<int>& nums) {
         int result = 0;
         int n = nums.size();
-        for(int i=1 ; i<n-1 ; i++){
-            if(2*(nums[i-1] + nums[i+1]) == nums[i]){
+        int i=0;
+        int j=2;
+        while(j<n){
+            if(2*(nums[i]+nums[j]) == nums[j-1]){
                 result++;
             }
+            i++;
+            j++;
         }
         return result;
     }
