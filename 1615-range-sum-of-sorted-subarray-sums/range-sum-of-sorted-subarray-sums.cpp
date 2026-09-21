@@ -1,22 +1,26 @@
 class Solution {
 public:
+    typedef pair<int,int>P;
     int M=1e9+7;
     int rangeSum(vector<int>& nums, int n, int left, int right) {
-
-        vector<int> temp;
+        
+        priority_queue<P,vector<P>,greater<P>>pq;
         for(int i=0 ; i<n ; i++){
-            int sum=0;
-            for(int j=i ; j<n ; j++){
-                sum+=nums[j];
-                temp.push_back(sum);
+            pq.push({nums[i],i});
+        }
+        int result=0;
+        for(int count=1 ; count<=right ; count++){
+            auto p=pq.top();
+            pq.pop();
+            int idx = p.second;
+            int sum = p.first;
+            if(count>=left){
+                result=(result+sum)%M;
+            }
+            if(idx+1 <n){
+                pq.push({sum+nums[idx+1],idx+1});
             }
         }
-        sort(begin(temp),end(temp));
-        int result=0;
-        for(int i=left-1 ; i<=right-1 ; i++){
-            result=(result+temp[i])%M;
-        }
         return result;
-
     }
 };
