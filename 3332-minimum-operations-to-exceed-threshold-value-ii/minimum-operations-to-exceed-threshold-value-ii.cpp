@@ -2,10 +2,8 @@ class Solution {
 public:
     typedef long long ll;
     int minOperations(vector<int>& nums, int k) {
-        priority_queue<ll,vector<ll>,greater<>>pq;
-        for(int &num:nums){
-            pq.push(num);
-        }
+        priority_queue<ll,vector<ll>,greater<>>pq(begin(nums),end(nums));
+        
         int count = 0;
         while(pq.top() < k ){
             long long num1 = pq.top();
