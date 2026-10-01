@@ -10,7 +10,7 @@ public:
             pq.pop();
             long long num2 = pq.top();
             pq.pop();
-            pq.push(min(num1,num2)*2 + max(num1,num2));
+            pq.push(num1*2 + num2);
             count++;
         }
         return count;
