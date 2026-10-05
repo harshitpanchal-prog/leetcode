@@ -20,9 +20,9 @@ public:
         sort(vec.begin(),vec.end(),lambda);
         
         int i=0;
-        vector<string>result;
+        vector<string>result(k);
         while(i<k){
-            result.push_back(vec[i].first);
+            result[i]=vec[i].first;
             i++;
         }
         return result;
