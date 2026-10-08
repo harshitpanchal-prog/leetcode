@@ -1,20 +1,17 @@
 class Solution {
 public:
     int scoreOfParentheses(string s) {
+        int depth=0;
         int score=0;
-        vector<int>vec;
         int n = s.length();
         for(int i=0 ; i<n ; i++){
             if(s[i]=='('){
-                vec.push_back(score);
-                score=0;
+                depth++;
             }else{
+                depth--;
                 if(s[i-1]=='('){
-                    score=vec.back()+1;
-                }else{
-                    score=vec.back()+(2*score);
+                    score+=(1<<depth);
                 }
-                vec.pop_back();
             }
         }
         return score;
