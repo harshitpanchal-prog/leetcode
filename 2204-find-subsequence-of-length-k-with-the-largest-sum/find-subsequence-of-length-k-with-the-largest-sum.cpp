@@ -5,18 +5,21 @@ public:
         if(k==n){
             return nums;
         }
-        vector<pair<int,int>>vec(n);
-        for(int i=0;i<n;i++){
-            vec[i]=make_pair(i,nums[i]);
-        }
-        auto lambda=[](auto& P1 ,auto& P2){
-            return P1.second>P2.second;
-        };
-        sort(begin(vec),end(vec),lambda);
-        sort(begin(vec),begin(vec)+k);
-        vector<int>result(k);
-        for(int i=0 ; i<k ; i++){
-            result[i]=vec[i].second;
+        vector<int>temp(nums);
+        nth_element(begin(temp),begin(temp)+k-1,end(temp),greater<int>());
+        int kthlargest=temp[k-1];
+        int countkthlargest=count(begin(temp),begin(temp)+k,kthlargest);
+        vector<int>result;
+        for(int &num : nums){
+            if(num>kthlargest){
+                result.push_back(num);
+            }else if(num==kthlargest && countkthlargest>0){
+                result.push_back(num);
+                countkthlargest--;
+            }
+            if(result.size()==k){
+                break;
+            }
         }
         return result;
     }
