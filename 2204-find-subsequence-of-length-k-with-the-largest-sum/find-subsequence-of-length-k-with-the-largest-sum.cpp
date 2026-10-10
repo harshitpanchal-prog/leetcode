@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> maxSubsequence(vector<int>& nums, int k) {
+        int n=nums.size();
+        if(k==n){
+            return nums;
+        }
+        vector<pair<int,int>>vec(n);
+        for(int i=0;i<n;i++){
+            vec[i]=make_pair(i,nums[i]);
+        }
+        auto lambda=[](auto& P1 ,auto& P2){
+            return P1.second>P2.second;
+        };
+        sort(begin(vec),end(vec),lambda);
+        sort(begin(vec),begin(vec)+k);
+        vector<int>result(k);
+        for(int i=0 ; i<k ; i++){
+            result[i]=vec[i].second;
+        }
+        return result;
+    }
+};
