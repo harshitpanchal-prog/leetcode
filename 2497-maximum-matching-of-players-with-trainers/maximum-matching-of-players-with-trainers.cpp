@@ -10,13 +10,11 @@ public:
         int j=0;
 
         while(i<n && j<m){
-            if(players[i]>trainers[j]){
-                j++;
-            }else{
+            if(players[i]<=trainers[j]){
                 count++;
                 i++;
-                j++;
             }
+            j++;
         }
         return count;
         
