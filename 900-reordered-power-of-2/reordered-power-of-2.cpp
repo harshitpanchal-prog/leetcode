@@ -1,17 +1,19 @@
 class Solution {
 public:
-    string Rordered(int n){
-        string s=to_string(n);
-        sort(begin(s),end(s));
-        return s;
+    unordered_set<string>st;
+    void getset(){
+        for(int i=0 ; i<=29 ; i++){
+            string s=to_string(1<<i);
+            sort(begin(s),end(s));
+            st.insert(s);
+        }
     }
     bool reorderedPowerOf2(int n) {
-        string a=Rordered(n);
-        for(int p=0 ; p<=29 ; p++){
-            if(a==Rordered(1<<p)){
-                return true;
-            }
+        if(st.empty()){
+            getset();
         }
-        return false;
+        string s=to_string(n);
+        sort(begin(s),end(s));
+        return st.count(s);
     }
 };
