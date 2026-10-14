@@ -1,19 +1,20 @@
 class Solution {
 public:
-    unordered_set<string>st;
-    void getset(){
-        for(int i=0 ; i<=29 ; i++){
-            string s=to_string(1<<i);
-            sort(begin(s),end(s));
-            st.insert(s);
+    vector<int>getvectorcount(int n){
+        vector<int>vec(10,0);
+        while(n){
+            vec[n%10]++;
+            n/=10;
         }
+        return vec;
     }
     bool reorderedPowerOf2(int n) {
-        if(st.empty()){
-            getset();
+        vector<int>input=getvectorcount(n);
+        for(int i=0 ; i<=29 ; i++){
+            if(input == getvectorcount(1<<i)){
+                return true;
+            }
         }
-        string s=to_string(n);
-        sort(begin(s),end(s));
-        return st.count(s);
+        return false;
     }
 };
