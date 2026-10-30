@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string findroot(string word,unordered_set<string>st){
+        for(int l=1 ; l<=word.length() ; l++){
+            string root=word.substr(0,l);
+            if(st.count(root)){
+                return root;
+            }
+        }
+        return word;
+    }
+    string replaceWords(vector<string>& dictionary, string sentence) {
+        unordered_set<string>st(begin(dictionary),end(dictionary));
+        string result;
+        string word;
+        stringstream ss(sentence);
+        while(getline(ss,word,' ')){
+            result+=findroot(word,st)+" ";
+        }
+        result.pop_back();
+        return result;
+    }
+};
