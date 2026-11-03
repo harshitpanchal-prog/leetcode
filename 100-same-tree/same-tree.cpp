@@ -18,9 +18,31 @@ public:
         if(!p || !q){
             return false;
         }
-        if(p->val != q->val){
-            return false;
+        queue<TreeNode*>q1;
+        queue<TreeNode*>q2;
+        q1.push(p);
+        q2.push(q);
+        while(!q1.empty() && !q2.empty()){
+            TreeNode*node1=q1.front();
+            q1.pop();
+            TreeNode*node2=q2.front();
+            q2.pop();
+            if(node1->val != node2->val){
+                return false;
+            }
+            if(node1->left && node2->left){
+                q1.push(node1->left);
+                q2.push(node2->left);
+            }else if(node1->left || node2->left){
+                return false;
+            }
+            if(node1->right && node2->right){
+                q1.push(node1->right);
+                q2.push(node2->right);
+            }else if(node1->right || node2->right){
+                return false;
+            }
         }
-        return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
+        return true;;
     }
 };
