@@ -3,17 +3,15 @@ public:
     long long countBadPairs(vector<int>& nums) {
         int n=nums.size();
         long long result=0;
-        for(int i=0 ; i<n ; i++){
-            nums[i]=nums[i]-i;
-        }
+        
         unordered_map<int,int>mp;
-        mp[nums[0]]=1;
-        for(int j=1 ; j<n ; j++){
-            int countofnums=mp[nums[j]];
-            int totalnumsbeforej=j;
-            int badpair=totalnumsbeforej-countofnums;
-            result+=badpair;
-            mp[nums[j]]++;
+        
+        for(int j=0 ; j<n ; j++){
+            int diff=nums[j]-j;
+            int goodpair=mp[diff];
+            int totalpairsinpast=j;
+            result+=totalpairsinpast-goodpair;
+            mp[diff]++;
         }
         return result;
     }
